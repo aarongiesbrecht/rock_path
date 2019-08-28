@@ -8,23 +8,29 @@ class SquareMapPage extends StatefulWidget {
 }
 
 class SquareMapPageState extends State<SquareMapPage> {
+
+  //appbar styles/title 
   final title = 'grid test';
   final TextStyle titleStyle = TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.deepPurple[100]);
+  
+  //create squaremap to contain SquareTileButtons
   final tileList = new SquareMap(108);
-  //final tileList = List.generate(126, (i) => new SquareTileButton(true));
 
   //handles bottom nav bar onTap
   int _current = 0;
   void _onTap(int i){
+    //return to title screen
     if (i == 0) {
       Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new LandingPage()));
       print('home!');
+    //run squareMap's wipeMap
     }else if (i ==1) {
       this.setState(() {
         tileList.wipeMap();
       });
       print('wiped page!');
     }
+    //update navbar's currently selected
     setState(() {
       _current = i;
     });  

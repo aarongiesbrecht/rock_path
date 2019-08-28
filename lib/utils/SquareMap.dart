@@ -1,5 +1,3 @@
-import 'package:rock_path/pages/SquareMapPage.dart';
-
 import '../UI/SquareTileButton.dart';
 
 class SquareMap {
@@ -10,13 +8,14 @@ class SquareMap {
     _map = List.generate(length, (i) => new SquareTileButton(i, true, () => _onTap(i)));
   }
 
-  //pull current widget flip "state" and reprint
+  //pull current widget flip "state" and replace
   void _onTap(int i) {
-  bool _current = !_map[i].getEmpty;
-  _map[i] = new SquareTileButton(i, _current, () => _onTap(i));
-  print('$i set to $_current');
+    bool _current = !_map[i].getEmpty;
+    _map[i] = new SquareTileButton(i, _current, () => _onTap(i));
+    print('$i set to $_current');
   }
 
+  //cycle through _map and replace all tiles with getEmpty value of false
   void wipeMap(){
     bool _current;
     for (int i = 0; i < _map.length; i++) {

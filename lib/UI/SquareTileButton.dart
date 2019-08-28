@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../pages/SquareMapPage.dart';
 
 class SquareTileButton extends StatelessWidget {
 
@@ -8,6 +9,7 @@ class SquareTileButton extends StatelessWidget {
 
   SquareTileButton(this._index, this._isEmpty, this._onTap);
 
+  //expandable square button with purple infill and a dark border
   @override
   Widget build(BuildContext context) {
     return new Material(
@@ -18,7 +20,7 @@ class SquareTileButton extends StatelessWidget {
         child: new Center(
           child: new Container(
             decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.blueGrey, width: 2.0)
+              border: new Border.all(color: Colors.deepPurple[500], width: 2.0)
             ),
           ),
         ),
