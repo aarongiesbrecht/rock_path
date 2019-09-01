@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rock_path/pages/landing_page.dart';
-import '../utils/SquareMap.dart';
+import '../UI/SquareMap.dart';
 
 class SquareMapPage extends StatefulWidget {
   @override

@@ -1,22 +1,61 @@
 import 'package:flutter/material.dart';
-import '../pages/SquareMapPage.dart';
 
-class SquareTileButton extends StatelessWidget {
+class SquareTileButton extends StatefulWidget {
 
-  final int _index;
-  final bool _isEmpty;
-  final VoidCallback _onTap;
+  final List<bool> tileType;
+  final VoidCallback onTap;
 
-  SquareTileButton(this._index, this._isEmpty, this._onTap);
+  SquareTileButton({Key key, this.tileType, this.onTap}): super(key: key);
 
-  //expandable square button with purple infill and a dark border
+  @override
+  _SquareTileButtonState createState() => _SquareTileButtonState(tileType);
+}
+
+class _SquareTileButtonState extends State<SquareTileButton> {
+
+  List<bool> tileType;
+  Color color;
+  _SquareTileButtonState(this.tileType);
+
+  String currentType;
+
+  @override
+  void initState() {    
+    for (int i; i<4; i++) {
+      if (tileType[i]) {
+        switch (i) {
+          case 0:
+            currentType = 'empty';
+            break;
+          case 1:
+            currentType = 'wall';
+            break;
+          case 2:
+            currentType = 'start';
+            break;
+          case 3:
+            currentType = 'finish';
+            break;
+          default:
+        }
+      }
+    }
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(SquareTileButton oldWidget) {
+    this.tileType = this.widget.tileType;
+    super.didUpdateWidget(oldWidget);  
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Material(
       //color is a slightly darker shade if tile is full
-      color: _isEmpty == true ? Colors.deepPurple[100] : Colors.deepPurple[300],
+      color: color,
       child: new InkWell(
-        onTap: _onTap,
+        onTap: widget.onTap,
         child: new Center(
           child: new Container(
             decoration: new BoxDecoration(
@@ -27,9 +66,5 @@ class SquareTileButton extends StatelessWidget {
       )
     );
   }
-
-  int get getIndex => _index;
-
-  bool get getEmpty => _isEmpty;
-
+  bool get getEmpty => widget.tileType;
 }
