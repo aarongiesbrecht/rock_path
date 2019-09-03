@@ -36,7 +36,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
   }
 
   void updateTile() {
-    for (int i; i<4; i++) {
+    for (int i = 0; i<4; i++) {
       if (tileType[i]) {
         switch (i) {
           case 0:
@@ -79,4 +79,8 @@ class _SquareTileButtonState extends State<SquareTileButton> {
     );
   }
   String get getType => currentType;
+  void setCurrentType(List<bool> newType) {
+    tileType = newType;
+    updateTile();
+  }
 }

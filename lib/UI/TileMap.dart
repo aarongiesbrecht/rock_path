@@ -37,26 +37,15 @@ class _TileMapState extends State<TileMap> {
   //blank data map made with a preset tile
   void initMap() {
     List<bool> presetTile = [true, false, false, false];
-    List<List<bool>> map = List.generate(length, (i) => presetTile);
+    map = List.generate(length, (i) => presetTile);
   }
 
   //ontap method handed to tiles
   void onTap(int i) {
-    switch (currentType) {
-      case [true, false, false, false]:
-        
-        break;
-      case [false, true, false, false]:
-
-        break;
-      case [false, false, true, false]:
-
-        break;
-      case [false, false, false, true]:
-
-        break;
-      default:
-    }
+    setState(() {
+      map[i] = currentType;
+    });
+    print('tapped tile: $i');
   }
 
   @override
@@ -67,9 +56,12 @@ class _TileMapState extends State<TileMap> {
         padding: const EdgeInsets.all(1),
         mainAxisSpacing: 1,
         crossAxisSpacing: 1,
-        children: this.map.asMap().map((index, value) => 
-          MapEntry(int, SquareTileButton(value, () => onTap(index), index))
-        ).values.toList(),
+        children: this.map
+          .asMap()
+          .map((index, value) => 
+            MapEntry<int, SquareTileButton>(index, SquareTileButton(value, () => 
+              onTap(index), index)))
+              .values.toList(),
         primary: false,
       ),
     );
