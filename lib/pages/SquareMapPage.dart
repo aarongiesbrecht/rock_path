@@ -40,12 +40,15 @@ class SquareMapPageState extends State<SquareMapPage> {
         switch (selectedTile) {
           case 0:
             title = 'current tile: wall';
+            currentType = [false, true, false, false];
             break;
           case 1:
             title = 'current tile: start';
+            currentType = [false, false, true, false];
             break;
           case 2:
             title = 'current tile finish';
+            currentType = [false, false, false, true];
             break;
           default:
         }

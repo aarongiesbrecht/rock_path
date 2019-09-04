@@ -43,7 +43,7 @@ class _TileMapState extends State<TileMap> {
   //ontap method handed to tiles
   void onTap(int i) {
     setState(() {
-      map[i] = currentType;
+      map[i] = this.currentType;
     });
     print('tapped tile: $i');
   }
