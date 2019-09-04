@@ -15,6 +15,7 @@ class TileMap extends StatefulWidget{
 
 class _TileMapState extends State<TileMap> {
 
+  //constructor methods
   int length;
   List<List<bool>> map;
   //default type set to wall
@@ -22,29 +23,42 @@ class _TileMapState extends State<TileMap> {
 
   _TileMapState(this.length, this.currentType);
 
+  //keeps track of start/finish tiles to ensure there is only
+  //ever one of each
+  int startIndex;
+  bool hasStart = false;
+  int finishIndex;
+  bool hasFinish = false;
+
+  //initializes the map using default tile type passed from above
   @override
   void initState() {
-    initMap();
+    map = List.generate(length, (i) => currentType);
+    currentType = [false, true, false, false];
     super.initState();
   }
 
+  //called upon constructor update
   @override
   void didUpdateWidget(TileMap oldWidget) {
     this.currentType = this.widget.currentType;
     super.didUpdateWidget(oldWidget);
   }
 
-  //blank data map made with a preset tile
-  void initMap() {
-    List<bool> presetTile = [true, false, false, false];
-    map = List.generate(length, (i) => presetTile);
-  }
-
   //ontap method handed to tiles
   void onTap(int i) {
-    setState(() {
-      map[i] = this.currentType;
-    });
+    //updates tiles type to currently selected type from above layer
+    if (map[i] != this.currentType) {
+      setState(() {
+        map[i] = this.currentType;
+      });
+    } else {
+      //instead of a tile keeping its state if there is no change
+      //we set it to empty
+      setState(() {
+        map[i] = [true, false, false, false,];
+      });
+    }
     print('tapped tile: $i');
   }
 
@@ -56,6 +70,8 @@ class _TileMapState extends State<TileMap> {
         padding: const EdgeInsets.all(1),
         mainAxisSpacing: 1,
         crossAxisSpacing: 1,
+        //this mess is needed to map our tile data to a tile list while maintaining
+        //individual tile indices
         children: this.map
           .asMap()
           .map((index, value) => 
