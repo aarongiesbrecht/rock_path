@@ -30,8 +30,8 @@ class _SquareTileButtonState extends State<SquareTileButton> {
 
   @override
   void didUpdateWidget(SquareTileButton oldWidget) {
-    updateTile();
     this.tileType = this.widget.tileType;
+    updateTile();
     super.didUpdateWidget(oldWidget);  
   }
 
@@ -68,6 +68,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
       color: color,
       child: new InkWell(
         onTap: () => onTap(),
+        onDoubleTap: () => print('tile $index type: $currentType'),
         child: new Center(
           child: new Container(
             decoration: new BoxDecoration(

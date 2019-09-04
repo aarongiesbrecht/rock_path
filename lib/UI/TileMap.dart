@@ -5,7 +5,7 @@ import '../UI/SquareTileButton.dart';
 class TileMap extends StatefulWidget{
 
   final int length;
-  List<bool> currentType;
+  final List<bool> currentType;
   TileMap(this.length, this.currentType);
 
   @override
@@ -30,7 +30,7 @@ class _TileMapState extends State<TileMap> {
 
   @override
   void didUpdateWidget(TileMap oldWidget) {
-    //add update method
+    this.currentType = this.widget.currentType;
     super.didUpdateWidget(oldWidget);
   }
 
