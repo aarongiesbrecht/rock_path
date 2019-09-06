@@ -54,7 +54,7 @@ class SquareMapPageState extends State<SquareMapPage> {
         }
         _current = i;
       });
-      print('current tile: $title');
+      print(title);
     }        //update navbar's currently selected
   }
 
@@ -84,7 +84,7 @@ class SquareMapPageState extends State<SquareMapPage> {
           backgroundColor: Colors.deepPurple[400],
         ),
         //scaffold body ---------------------------------
-        body: TileMap(108, currentType),
+        body: TileMap(192, currentType),
         backgroundColor: Colors.deepPurple[500],
         //bottom navi bar -------------------------------
         bottomNavigationBar: BottomNavigationBar(
