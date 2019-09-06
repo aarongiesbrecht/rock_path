@@ -74,6 +74,13 @@ class _TileMapState extends State<TileMap> {
     }else {
       //instead of a tile keeping its state if there is no change
       //we set it to empty
+      if (i == startIndex) {
+        hasStart = false;
+        startIndex = 1000;
+      }else if (i == finishIndex) {
+        hasFinish = false;
+        finishIndex = 1000;
+      }
       setState(() {
         map[i] = [true, false, false, false];
       });
