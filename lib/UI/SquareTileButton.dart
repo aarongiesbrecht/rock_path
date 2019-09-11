@@ -5,20 +5,22 @@ class SquareTileButton extends StatefulWidget {
   final List<bool> tileType;
   final VoidCallback onTap;
   final int index;
+  final bool isPath;
 
-  SquareTileButton( @required this.tileType, @required this.onTap, @required this.index);
+  SquareTileButton( @required this.tileType, @required this.onTap, @required this.index, @required this.isPath);
 
   @override
-  _SquareTileButtonState createState() => _SquareTileButtonState(tileType, onTap, index);
+  _SquareTileButtonState createState() => _SquareTileButtonState(tileType, onTap, index, isPath);
 }
 
 class _SquareTileButtonState extends State<SquareTileButton> {
 
+  bool isPath;
   List<bool> tileType;
   final VoidCallback onTap;
   final int index;
   Color color;
-  _SquareTileButtonState(this.tileType, this.onTap, this.index);
+  _SquareTileButtonState(this.tileType, this.onTap, this.index, this.isPath);
 
   String currentType;
 
@@ -35,6 +37,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
     super.didUpdateWidget(oldWidget);  
   }
 
+  //checks current tiletype and updates tiles current type and color
   void updateTile() {
     for (int i = 0; i<4; i++) {
       if (tileType[i]) {
@@ -53,11 +56,14 @@ class _SquareTileButtonState extends State<SquareTileButton> {
             break;
           case 3:
             currentType = 'finish';
-            color = Colors.redAccent[100];
+            color = Colors.red;
             break;
           default:
         }
       }
+    }
+    if (isPath) {
+      color = Colors.red[900];
     }
   }
 
@@ -66,7 +72,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
     return new Material(
       //color is a slightly darker shade if tile is full
       color: color,
-      child: new InkWell(
+      child: new GestureDetector(
         onTap: () => onTap(),
         onDoubleTap: () => print('tile $index type: $currentType'),
         child: new Center(

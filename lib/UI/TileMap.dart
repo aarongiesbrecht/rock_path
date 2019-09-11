@@ -127,7 +127,7 @@ class _TileMapState extends State<TileMap> {
           .asMap()
           .map((index, value) => 
             MapEntry<int, SquareTileButton>(index, SquareTileButton(value, () => 
-              onTap(index), index)))
+              onTap(index), index, false)))
               .values.toList(),
       ),
     );

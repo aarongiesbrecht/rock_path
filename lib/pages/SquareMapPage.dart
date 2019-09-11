@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../UI/TileMap.dart';
+import 'dart:math';
 
 class SquareMapPage extends StatefulWidget {
   @override
@@ -36,6 +37,7 @@ class SquareMapPageState extends State<SquareMapPage> {
       }else {
         selectedTile = 0;
       }
+      //update current tile type
       setState(() {
         switch (selectedTile) {
           case 0:
@@ -55,7 +57,7 @@ class SquareMapPageState extends State<SquareMapPage> {
         _current = i;
       });
       print(title);
-    }        //update navbar's currently selected
+    }
   }
 
   List<BottomNavigationBarItem> mainItems = [
