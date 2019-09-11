@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../UI/TileMap.dart';
-import 'dart:math';
 
 class SquareMapPage extends StatefulWidget {
   @override
@@ -15,7 +14,8 @@ class SquareMapPageState extends State<SquareMapPage> {
   int _current = 0;
   int selectedTile = 0;
   Color navBarColor = Colors.deepPurple[400];
-  List<bool> currentType = [true, false, false, false];
+  static List<bool> currentType = [true, false, false, false];
+
 
   //paired with bottom nav bar
   void _onTap(int i){ 
@@ -25,7 +25,9 @@ class SquareMapPageState extends State<SquareMapPage> {
       print('map erased, sent home');
     //wipes tiles to empty
     }else if (i == 1) {
-      //TODO add
+      //currently just rebuilds the page, not efficient, will change
+      Navigator.pop(context);
+      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SquareMapPage()));
       setState(() {
       _current = i;
       });
