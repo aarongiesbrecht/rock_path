@@ -6,10 +6,15 @@ class TileMap extends StatefulWidget{
 
   final int length;
   final List<bool> currentType;
-  TileMap(this.length, this.currentType);
+  final bool traverse;
+  TileMap(this.length, this.currentType, this.traverse);
+
+  void beginPath(){
+
+  }
 
   @override
-  _TileMapState createState() => _TileMapState(length, currentType);
+  _TileMapState createState() => _TileMapState(length, currentType, traverse);
 
 }
 
@@ -17,20 +22,21 @@ class _TileMapState extends State<TileMap> {
 
   //constructor methods
   int length;
+  bool traverse;
   List<List<bool>> map;
   //default type set to wall
   List<bool> currentType;
 
-  _TileMapState(this.length, this.currentType);
+  _TileMapState(this.length, this.currentType, this.traverse);
 
   //keeps track of start/finish tiles to ensure there is only
   //ever one of each
   int startIndex = 1000; //default value to represent null
   bool hasStart = false;
-  List<bool> startPreset = [false, false, true, false];
+  List<bool> startPreset = [false, false, true, false, false];
   int finishIndex = 1000;
   bool hasFinish = false;
-  List<bool> finishPreset = [false, false, false, true];
+  List<bool> finishPreset = [false, false, false, true, false];
 
   //initializes the map using default tile type passed from above
   @override
@@ -44,6 +50,7 @@ class _TileMapState extends State<TileMap> {
   @override
   void didUpdateWidget(TileMap oldWidget) {
     this.currentType = this.widget.currentType;
+    pathing();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -112,6 +119,11 @@ class _TileMapState extends State<TileMap> {
 
   }
 
+  void pathing() {
+    print('pathing run');
+    map[10] = [false, false, false, false, true];
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -127,10 +139,9 @@ class _TileMapState extends State<TileMap> {
           .asMap()
           .map((index, value) => 
             MapEntry<int, SquareTileButton>(index, SquareTileButton(value, () => 
-              onTap(index), index, false)))
+              onTap(index), index)))
               .values.toList(),
       ),
     );
   }
-
 }

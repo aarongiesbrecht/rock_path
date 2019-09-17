@@ -5,22 +5,22 @@ class SquareTileButton extends StatefulWidget {
   final List<bool> tileType;
   final VoidCallback onTap;
   final int index;
-  final bool isPath;
 
-  SquareTileButton( @required this.tileType, @required this.onTap, @required this.index, @required this.isPath);
+  SquareTileButton( @required this.tileType, @required this.onTap, 
+    @required this.index);
 
   @override
-  _SquareTileButtonState createState() => _SquareTileButtonState(tileType, onTap, index, isPath);
+  _SquareTileButtonState createState() => _SquareTileButtonState(
+    tileType, onTap, index);
 }
 
 class _SquareTileButtonState extends State<SquareTileButton> {
 
-  bool isPath;
   List<bool> tileType;
   final VoidCallback onTap;
   final int index;
   Color color;
-  _SquareTileButtonState(this.tileType, this.onTap, this.index, this.isPath);
+  _SquareTileButtonState(this.tileType, this.onTap, this.index);
 
   String currentType;
 
@@ -59,11 +59,9 @@ class _SquareTileButtonState extends State<SquareTileButton> {
             color = Colors.red;
             break;
           default:
+            color = Colors.red[900];
         }
       }
-    }
-    if (isPath) {
-      color = Colors.red[900];
     }
   }
 

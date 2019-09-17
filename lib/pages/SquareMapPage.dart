@@ -10,24 +10,28 @@ class SquareMapPageState extends State<SquareMapPage> {
 
   //appbar styles/title 
   String title = 'current tile: wall';
-  final TextStyle titleStyle = TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.deepPurple[100]);
+  final TextStyle titleStyle = TextStyle(
+    fontSize: 25, fontWeight: FontWeight.bold, color: Colors.deepPurple[100]
+  );
   int _current = 0;
   int selectedTile = 0;
   Color navBarColor = Colors.deepPurple[400];
-  static List<bool> currentType = [true, false, false, false];
+  static List<bool> currentType = [true, false, false, false, false];
+  static bool traverse = false;
 
-
+  TileMap mainMap = TileMap(192, currentType, false);
+  
   //paired with bottom nav bar
   void _onTap(int i){ 
-    //pop page stack and retuen to title
+    //run path
     if (i == 0) {
-      Navigator.pop(context);
-      print('map erased, sent home');
+      traverse = true;
     //wipes tiles to empty
     }else if (i == 1) {
       //currently just rebuilds the page, not efficient, will change
       Navigator.pop(context);
-      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SquareMapPage()));
+      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context)
+        => new SquareMapPage()));
       setState(() {
       _current = i;
       });
@@ -88,7 +92,7 @@ class SquareMapPageState extends State<SquareMapPage> {
           backgroundColor: Colors.deepPurple[400],
         ),
         //scaffold body ---------------------------------
-        body: TileMap(192, currentType),
+        body: mainMap,
         backgroundColor: Colors.deepPurple[500],
         //bottom navi bar -------------------------------
         bottomNavigationBar: BottomNavigationBar(
