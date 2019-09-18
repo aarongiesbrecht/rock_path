@@ -39,7 +39,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
 
   //checks current tiletype and updates tiles current type and color
   void updateTile() {
-    for (int i = 0; i<4; i++) {
+    for (int i = 0; i<5; i++) {
       if (tileType[i]) {
         switch (i) {
           case 0:
@@ -58,8 +58,11 @@ class _SquareTileButtonState extends State<SquareTileButton> {
             currentType = 'finish';
             color = Colors.red;
             break;
-          default:
+          case 4:
+            currentType = 'path';
             color = Colors.red[900];
+            break;
+          default:
         }
       }
     }
@@ -84,6 +87,7 @@ class _SquareTileButtonState extends State<SquareTileButton> {
     );
   }
   String get getType => currentType;
+
   void setCurrentType(List<bool> newType) {
     tileType = newType;
     updateTile();

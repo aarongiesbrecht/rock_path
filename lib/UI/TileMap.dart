@@ -42,7 +42,7 @@ class _TileMapState extends State<TileMap> {
   @override
   void initState() {
     map = List.generate(length, (i) => currentType);
-    currentType = [false, true, false, false];
+    currentType = [false, true, false, false, false];
     super.initState();
   }
 
@@ -100,7 +100,7 @@ class _TileMapState extends State<TileMap> {
     if (hasStart && type == 'start') {
       setState(() {
         if (startIndex != 1000) {
-          map[startIndex] = [true, false, false, false];
+          map[startIndex] = [true, false, false, false, false];
         }
         startIndex = i;
       });
@@ -108,7 +108,7 @@ class _TileMapState extends State<TileMap> {
     } else if (hasFinish && type == 'finish') {
       setState(() {
         if (finishIndex != 1000) {
-          map[finishIndex] = [true, false, false, false];
+          map[finishIndex] = [true, false, false, false, false];
         }
       });
       finishIndex = i;
@@ -121,7 +121,16 @@ class _TileMapState extends State<TileMap> {
 
   void pathing() {
     print('pathing run');
-    map[10] = [false, false, false, false, true];
+    List<bool> path = [false, false, false, false, true];
+    List<bool> empty = [true, false, false, false, false];
+    //List<bool> finish = [false, false, false, true, false];
+    for (int i = 0; i < length; i++) {
+      if (map[i] == empty) {
+        setState(() {
+          map[i] = path;
+        });
+      }
+    }
   }
 
   @override
