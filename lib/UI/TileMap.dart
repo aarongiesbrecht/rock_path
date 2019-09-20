@@ -9,10 +9,6 @@ class TileMap extends StatefulWidget{
   final bool traverse;
   TileMap(this.length, this.currentType, this.traverse);
 
-  void beginPath(){
-
-  }
-
   @override
   _TileMapState createState() => _TileMapState(length, currentType, traverse);
 
@@ -33,25 +29,31 @@ class _TileMapState extends State<TileMap> {
   //ever one of each
   int startIndex = 1000; //default value to represent null
   bool hasStart = false;
-  List<bool> startPreset = [false, false, true, false, false];
+  List<bool> startPreset = [false, false, true, false];
   int finishIndex = 1000;
   bool hasFinish = false;
-  List<bool> finishPreset = [false, false, false, true, false];
+  List<bool> finishPreset = [false, false, false, true];
 
   //initializes the map using default tile type passed from above
   @override
   void initState() {
     map = List.generate(length, (i) => currentType);
-    currentType = [false, true, false, false, false];
+    currentType = [false, true, false, false];
     super.initState();
   }
 
   //called upon constructor update
   @override
   void didUpdateWidget(TileMap oldWidget) {
-    this.currentType = this.widget.currentType;
-    pathing();
-    super.didUpdateWidget(oldWidget);
+    //if above state flipped traverse bool
+    if (this.traverse != this.widget.traverse){
+      this.traverse = this.widget.traverse;
+      pathing();
+    }else {
+      //if update was no a pathing call, call normal update
+      this.currentType = this.widget.currentType;
+      super.didUpdateWidget(oldWidget);
+    }
   }
 
   //ontap method handed to tiles
@@ -95,20 +97,22 @@ class _TileMapState extends State<TileMap> {
     print('tapped tile: $i');
   }
 
+  //ensures only one start/finish exists at a time
   void handleEndPoints(int i, String type) {
     //handle start points
     if (hasStart && type == 'start') {
       setState(() {
         if (startIndex != 1000) {
-          map[startIndex] = [true, false, false, false, false];
+          map[startIndex] = [true, false, false, false];
         }
         startIndex = i;
       });
       print('a start was replaced');
+      //finish points
     } else if (hasFinish && type == 'finish') {
       setState(() {
         if (finishIndex != 1000) {
-          map[finishIndex] = [true, false, false, false, false];
+          map[finishIndex] = [true, false, false, false];
         }
       });
       finishIndex = i;
@@ -121,16 +125,10 @@ class _TileMapState extends State<TileMap> {
 
   void pathing() {
     print('pathing run');
-    List<bool> path = [false, false, false, false, true];
-    List<bool> empty = [true, false, false, false, false];
-    //List<bool> finish = [false, false, false, true, false];
-    for (int i = 0; i < length; i++) {
-      if (map[i] == empty) {
-        setState(() {
-          map[i] = path;
-        });
-      }
-    }
+    //preset path tiletype
+    List<bool> path = [false, false, false, false];
+
+
   }
 
   @override

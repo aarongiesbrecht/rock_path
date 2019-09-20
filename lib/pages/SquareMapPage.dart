@@ -16,7 +16,7 @@ class SquareMapPageState extends State<SquareMapPage> {
   int _current = 0;
   int selectedTile = 0;
   Color navBarColor = Colors.deepPurple[400];
-  static List<bool> currentType = [true, false, false, false, false];
+  static List<bool> currentType = [true, false, false, false];
   static bool traverse = false;
   
   //paired with bottom nav bar
@@ -24,12 +24,12 @@ class SquareMapPageState extends State<SquareMapPage> {
     //run path
     if (i == 0) {
       setState(() {
-        traverse = false;
+        traverse = !traverse;
       });
     //wipes tiles to empty
     }else if (i == 1) {
       setState(() {
-        currentType = [true, false, false, false, false];
+        currentType = [true, false, false, false];
       });
       //currently just rebuilds the page, not efficient, will change
       Navigator.pop(context);
@@ -51,15 +51,15 @@ class SquareMapPageState extends State<SquareMapPage> {
         switch (selectedTile) {
           case 0:
             title = 'current tile: wall';
-            currentType = [false, true, false, false, false];
+            currentType = [false, true, false, false];
             break;
           case 1:
             title = 'current tile: start';
-            currentType = [false, false, true, false, false];
+            currentType = [false, false, true, false];
             break;
           case 2:
             title = 'current tile finish';
-            currentType = [false, false, false, true, false];
+            currentType = [false, false, false, true];
             break;
           default:
         }
@@ -95,7 +95,7 @@ class SquareMapPageState extends State<SquareMapPage> {
           backgroundColor: Colors.deepPurple[400],
         ),
         //scaffold body ---------------------------------
-        body: TileMap(192, currentType, traverse),
+        body: TileMap(12, currentType, traverse), //length should be 192
         backgroundColor: Colors.deepPurple[500],
         //bottom navi bar -------------------------------
         bottomNavigationBar: BottomNavigationBar(
