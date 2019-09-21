@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import '../UI/SquareTileButton.dart';
 
@@ -127,8 +128,30 @@ class _TileMapState extends State<TileMap> {
     print('pathing run');
     //preset path tiletype
     List<bool> path = [false, false, false, false];
+    //init path
+    List<int> workingPath = [startIndex];
+    List<List<bool>> workingMap;
+    List<bool> pathRow = [false,false,false,false,false,false,
+      false,false,false,false,false,false];
+    workingMap = List.generate(16, (i) => pathRow);
+    //make grid from map tp make for easier pathing
+    for (int i = 0; i<length; i++) {
+      workingMap[1~/12][i%12] = map[i][0];
+    }
+    print('map created');
+    for ( int i = 0; i < 16; i++) {
+      print(workingMap[i]);
+    }
+    
 
+    //dir list for easier pathing
+    List<int> directions = [0,1,2,3];
 
+    //main loop, continues as long as there are available paths
+    while (workingPath.isNotEmpty) {
+      //cycle directions in random order
+      break;//tmp
+    }
   }
 
   @override

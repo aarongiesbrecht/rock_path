@@ -95,7 +95,7 @@ class SquareMapPageState extends State<SquareMapPage> {
           backgroundColor: Colors.deepPurple[400],
         ),
         //scaffold body ---------------------------------
-        body: TileMap(12, currentType, traverse), //length should be 192
+        body: TileMap(192, currentType, traverse), //length should be 192
         backgroundColor: Colors.deepPurple[500],
         //bottom navi bar -------------------------------
         bottomNavigationBar: BottomNavigationBar(
